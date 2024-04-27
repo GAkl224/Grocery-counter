@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -54,7 +55,7 @@ public:
 
     int number_of_overflows() {
         cout << "\noverflowed\n";
-        value = 0;
+        value -= 9999;
         overflows++;
         return overflows;
     }
@@ -71,23 +72,18 @@ int main() {
     GroceryCounter counter;
     cout << counter.total() << endl;  // Output: $0.00
 
-    counter.tens();
-    counter.tens();
-    counter.tens();
-    counter.tens();
-    counter.tens();
-    counter.tens();
-    counter.tens();
-    counter.tens();
-    counter.ones();
-    counter.tenths(); //overflowed will reset counter
-    counter.tens();
-    counter.ones();
-    counter.tens();
-    counter.hundredths();
-    cout << counter.total() << endl;  
+    for(int i; i < 20; i++){
+        cout << counter.total() << endl;
+        counter.tens();
+        counter.ones();
+        counter.tens();
+        counter.hundredths();
+         
+    }
+    cout << counter.total() << endl;
 
 
+    
     counter.clear();
     cout << counter.total() << endl;  
     return 0;
