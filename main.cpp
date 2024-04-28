@@ -16,7 +16,7 @@ public:
     void tens() {
          value += 1000;
 
-        if(value >= 9999){
+        if(value > 9999){
             number_of_overflows();
         }
     }
@@ -24,7 +24,7 @@ public:
     //01.00
     void ones() {
         value += 100;
-        if(value >= 9999){
+        if(value > 9999){
             number_of_overflows();
         }
     }
@@ -32,7 +32,7 @@ public:
     //00.10
     void tenths() {
         value += 10;
-        if(value >= 9999){
+        if(value > 9999){
             number_of_overflows();
         }
     }
@@ -42,6 +42,35 @@ public:
         value += 1;
         if(value >= 9999){
             number_of_overflows();
+        }
+    }
+
+    void minusTens(){
+        value -= 1000;
+
+        if(value < 0){
+            underflows();
+        }
+
+    }
+
+    void minusOnes(){
+        value -= 100;
+        if(value < 0){
+            underflows();
+        }
+    }
+
+    void minusTenths(){
+        value -= 10;
+        if(value < 0){
+            underflows();
+        }
+    }
+    void minusHundreths(){
+        value -= 1;
+        if(value < 0){
+            underflows();
         }
     }
 
@@ -59,6 +88,11 @@ public:
         overflows++;
         return overflows;
     }
+    //if value goes under zero, this resets value back to zero
+    void underflows(){
+        value = 0;
+        cout << "\nUnderflowed\ncounter reset to zero\n";
+    }
 
 
     void clear() {
@@ -72,14 +106,11 @@ int main() {
     GroceryCounter counter;
     cout << counter.total() << endl;  // Output: $0.00
 
-    for(int i; i < 20; i++){
-        cout << counter.total() << endl;
-        counter.tens();
-        counter.ones();
-        counter.tens();
-        counter.hundredths();
-         
-    }
+    counter.ones();
+    counter.ones();
+    counter.minusOnes();
+    counter.minusOnes();
+    counter.minusTenths();
     cout << counter.total() << endl;
 
 
